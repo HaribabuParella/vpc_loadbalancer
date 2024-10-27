@@ -4,7 +4,7 @@ pipeline{
      stage('Create Instance template with MIG and LB') {
        steps{
          sh""""
-           gcloud compute instance-templates create nginx-template --project=hari-cloud-first-project --region us-central1 --machine-type=e2-medium --metadata-from-file startup-script=startup.sh  --service-account=jenkis-github@hari-cloud-first-project.iam.gserviceaccount.com
+           gcloud compute instance-templates create nginx-template --project=hari-cloud-first-project --region us-central1 --machine-type=e2-medium --metadata-from-file startup-script=./startup.sh  --service-account=jenkis-github@hari-cloud-first-project.iam.gserviceaccount.com
            gcloud compute target-pools create nginx-pool
            gcloud compute instance-groups managed create nginx-group --base-instance-name nginx --size 2 --template nginx-template --target-pool nginx-pool
            gcloud compute firewall-rules create www-firewall --allow tcp:80
